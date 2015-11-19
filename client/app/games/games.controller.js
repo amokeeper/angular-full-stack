@@ -3,9 +3,12 @@
 angular.module('meanTutorialApp')
   .controller('GamesCtrl', function ($scope, $http) {
 
+    $scope.filter = 'none';
+
     $http.get('/api/games')
     .success(function(data) {
       $scope.games = data;
+      $scope.originalGames = data;
     })
     .error(function(err) {
       alert('Error! Something went wrong');
@@ -44,6 +47,27 @@ angular.module('meanTutorialApp')
       .error(function(err){
         alert('Error! Something went wrong');
       });
+    };
+
+    $scope.resetGames = function(){
+      $scope.games = $scope.originalGames;
+      $scope.filter = 'none';
+    }
+
+    $scope.filterByGenre = function(genre){
+      $scope.resetGames();
+      $scope.games = $scope.games.filter(function(game){
+        return game.genre === genre;
+      });
+      $scope.filter = 'Genre: ' + genre;
+    };
+
+    $scope.filterByPlatform = function(platform){
+      $scope.resetGames();
+      $scope.games = $scope.games.filter(function(game){
+        return game.platform === platform;
+      });
+      $scope.filter = 'Platform: ' + platform;
     };
 
   });
