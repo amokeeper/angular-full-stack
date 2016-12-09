@@ -8,12 +8,37 @@
       <th>应用名称</th>
       <th>执行次数</th>
       <th>执行时间</th>
+      <th>操作</th>
     </thead>
     <tbody>
       <tr ng-repeat="cianalysis in cianalysisData">
-        <td>{{cianalysis.appName}}</td>
-        <td>{{cianalysis.execCount}}</td>
-        <td>{{cianalysis.timeCount}}</td>
+        <td ng-hide="cianalysis.edit">{{cianalysis.appName}}</td>
+        <td ng-show="cianalysis.edit"><input type="text" ng-model="cianalysis.appName"></td>
+
+
+        <td ng-hide="cianalysis.edit">
+          <a href="" ng-click="filterByExec(cianalysis.execCount)">{{cianalysis.execCount}}</a>
+        </td>
+        <td ng-show="cianalysis.edit"><input type="text" ng-model="cianalysis.execCount"></td>
+
+
+        <td ng-hide="cianalysis.edit">
+          <a href="" ng-click="filterByTime(cianalysis.timeCount)">{{cianalysis.timeCount}}</a>
+        </td>
+        <td ng-show="cianalysis.edit"><input type="text" ng-model="cianalysis.timeCount"></td>
+    
+
+
+        <td ng-hide="cianalysis.edit">
+          <button class="btn btn-success" ng-click="toggleEdit($index)">编辑</button>
+          <button class="btn btn-danger" ng-click="deleteCiAnalysis($index)">删除</button>
+        </td>
+        <td ng-show="cianalysis.edit">
+          <button class="btn btn-primary" ng-click="saveCiAnalysis($index)">保存</button>
+          <button class="btn btn-danger" ng-click="toggleEdit($index)">取消</button>
+        </td>
+
+
       </tr>
     </tbody>
     <tr>

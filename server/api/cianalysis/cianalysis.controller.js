@@ -24,3 +24,15 @@ exports.create = function(req, res) {
 };
 
 
+exports.destroy = function(req, res) {
+  CiAnalysis.findById(req.params.id, function (err, cianalysis) {
+    if(err) { return handleError(res, err); }
+    if(!cianalysis) { return res.send(404); }
+    cianalysis.remove(function(err) {
+      if(err) { return handleError(res, err); }
+      return res.send(204);
+    });
+  });
+};
+
+

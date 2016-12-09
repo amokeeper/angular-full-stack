@@ -24,5 +24,30 @@ angular.module('meanTutorialApp')
       });
     };
 
+    $scope.deleteCiAnalysis = function(index){
+      $http.delete('/api/cianalysis/' + $scope.cianalysisData[index]._id)
+      .success(function(){
+        $scope.cianalysisData.splice(index, 1);
+      })
+      .error(function(err){
+        alert('Error! Something went wrong');
+      });
+    };
+
+    $scope.toggleEdit = function(index){
+      $scope.cianalysisData[index].edit = !$scope.cianalysisData[index].edit;
+    };
+
+    $scope.saveGame = function(index){
+      $http.put('/api/cianalysis/' + $scope.cianalysisData[index]._id, $scope.cianalysisData[index])
+      .success(function(){
+        $scope.cianalysisData[index].edit = false;
+      })
+      .error(function(err){
+        alert('Error! Something went wrong');
+      });
+    };
+ 
+
 });
 
