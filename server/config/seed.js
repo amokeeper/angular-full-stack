@@ -7,6 +7,22 @@
 
 var Game = require('../api/game/game.model');
 var User = require('../api/user/user.model');
+var CiAnalysis = require('../api/cianalysis/cianalysis.model');
+
+
+CiAnalysis.find({}).remove(function(){
+  CiAnalysis.create({
+    appName:"供应商平台",
+    execCount:"120次",
+    timeCount:"210小时"
+  },{
+    appName:"内配系统",
+    execCount:"150次",
+    timeCount:"280小时"
+  });
+});
+
+
 
 Game.find({}).remove(function() {
   Game.create({

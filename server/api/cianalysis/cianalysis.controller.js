@@ -6,6 +6,8 @@
 'use strict';
 
 // Gets a list of Cianalysiss
-export function index(req, res) {
-  res.json([]);
-}
+exports.index = function(req, res) {
+   res.json([]);
+};
+
+
