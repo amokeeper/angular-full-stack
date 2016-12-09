@@ -2,10 +2,12 @@
 
 angular.module('meanTutorialApp')
   .controller('CiAnalysisCtrl', function ($scope, $http) {
+    $scope.filter = 'none';
 
     $http.get('/api/cianalysis')
     .success(function(data) {
       $scope.cianalysisData = data;
+      $scope.originalCianalysis = data;
       console.log($scope.cianalysisData);
     })
     .error(function(err) {
@@ -38,7 +40,7 @@ angular.module('meanTutorialApp')
       $scope.cianalysisData[index].edit = !$scope.cianalysisData[index].edit;
     };
 
-    $scope.saveGame = function(index){
+    $scope.saveCiAnalysis = function(index){
       $http.put('/api/cianalysis/' + $scope.cianalysisData[index]._id, $scope.cianalysisData[index])
       .success(function(){
         $scope.cianalysisData[index].edit = false;
@@ -46,6 +48,27 @@ angular.module('meanTutorialApp')
       .error(function(err){
         alert('Error! Something went wrong');
       });
+    };
+    $scope.resetCiAnalysis = function(){
+        $scope.cianalysisData = $scope.originalCianalysis;
+        $scope.filter = 'none';
+      }
+
+
+    $scope.filterByExec = function(exec){
+      $scope.resetCiAnalysis();
+      $scope.cianalysisData = $scope.cianalysisData.filter(function(cianalysis){
+        return cianalysis.execCount === exec;
+      });
+      $scope.filter = '执行次数: ' + exec;
+    };
+ 
+    $scope.filterByTime = function(time){
+      $scope.resetCiAnalysis();
+      $scope.cianalysisData = $scope.cianalysisData.filter(function(cianalysis){
+        return cianalysis.timeCount === time;
+      });
+      $scope.filter = '节省时间: ' + time;
     };
  
 

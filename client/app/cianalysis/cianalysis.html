@@ -1,8 +1,9 @@
 
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="col-md-8">
-	这是持续集成数据统计页面
-
+	 <h1>持续集成数据</h1>
+<button class="btn btn-primary" ng-click="resetCiAnalysis()">重置过滤器</button>
+  当前过滤条件: {{filter}}
 <table class="table table-striped">
     <thead>
       <th>应用名称</th>
