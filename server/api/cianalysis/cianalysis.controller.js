@@ -4,10 +4,23 @@
  */
 
 'use strict';
-
+var _ = require('lodash');
+var CiAnalysis = require('./cianalysis.model');
 // Gets a list of Cianalysiss
 exports.index = function(req, res) {
-   res.json([]);
+   CiAnalysis.find(function (err, cianalysis) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, cianalysis);
+  });
+};
+
+
+// Creates a new analysis in the DB.
+exports.create = function(req, res) {
+  CiAnalysis.create(req.body, function(err, cianalysis) {
+    if(err) { return handleError(res, err); }
+    return res.json(201, cianalysis);
+  });
 };
 
 

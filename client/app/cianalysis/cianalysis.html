@@ -1,5 +1,29 @@
 
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="col-md-12">
+<div class="col-md-8">
 	这是持续集成数据统计页面
+
+<table class="table table-striped">
+    <thead>
+      <th>应用名称</th>
+      <th>执行次数</th>
+      <th>执行时间</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="cianalysis in cianalysisData">
+        <td>{{cianalysis.appName}}</td>
+        <td>{{cianalysis.execCount}}</td>
+        <td>{{cianalysis.timeCount}}</td>
+      </tr>
+    </tbody>
+    <tr>
+      <td><input type="text" ng-model="newCiAnalysis.appName"></td>
+      <td><input type="text" ng-model="newCiAnalysis.execCount"></td>
+      <td><input type="text" ng-model="newCiAnalysis.timeCount"></td>
+      <td>
+        <button class="btn btn-primary" ng-click="addNewCiAnalysis()">添加新数据</button>
+      </td>
+    </tr>
+  </table>
+
 </div>
